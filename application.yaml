@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+spec:
+  destination:
+    namespace: vault
+    server: https://kubernetes.default.svc
+  source:
+    path: vault/
+    repoURL: "https://github.com/dispiny/local-kubernetes-manifest.git"
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    automated:
+      prune: false # 리소스 삭제 방지
+      selfHeal: true
+    syncOptions:
+      - Validate=false
+      - PruneLast=true
+      - RespectIgnoreDifferences=true
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+  ignoreDifferences:
+    - group: ""
+      kind: ConfigMap
+    - group: ""
+      kind: Secret
+    - group: networking.k8s.io
+      kind: Ingress # 이 경우 Ingress를 포함하여 관리
