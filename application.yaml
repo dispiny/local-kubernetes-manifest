@@ -29,3 +29,30 @@ spec:
       kind: Secret
     - group: networking.k8s.io
       kind: Ingress # 이 경우 Ingress를 포함하여 관리
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: home-iot
+spec:
+  destination:
+    name: ""
+    namespace: home-iot
+    server: https://kubernetes.default.svc
+  source:
+    path: ""
+    repoURL: https://dispiny.github.io/home-iot/
+    targetRevision: ""
+    chart: home-iot
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PruneLast=true
+      - RespectIgnoreDifferences=true
+      - ServerSideApply=true
+      - ApplyOutOfSyncOnly=true
+      - CreateNamespace=true
