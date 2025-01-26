@@ -3,7 +3,6 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: prometheus-server-conf
-  namespace: monitoring
 data:
   prometheus.yaml: |-
     global:

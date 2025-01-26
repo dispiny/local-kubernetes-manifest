@@ -92,7 +92,7 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: ghost
+    namespace: prometheus
     server: https://kubernetes.default.svc
   source:
     path: prometheus/

@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: prometheus-server-http
-  namespace: monitoring
   labels:
     app: prometheus
   annotations:
