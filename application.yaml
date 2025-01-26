@@ -82,3 +82,28 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: ghost
+    server: https://kubernetes.default.svc
+  source:
+    path: prometheus/
+    repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
