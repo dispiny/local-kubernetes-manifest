@@ -83,7 +83,6 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
 ---
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -91,19 +90,45 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    name: ''
+    name: ""
     namespace: prometheus
     server: https://kubernetes.default.svc
   source:
-    path: prometheus/
-    repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
-    targetRevision: HEAD
+    path: ""
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: "27.1.0"
+    chart: prometheus
   sources: []
   project: default
   syncPolicy:
     automated:
-      prune: false
-      selfHeal: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+spec:
+  destination:
+    name: ""
+    namespace: grafana
+    server: https://kubernetes.default.svc
+  source:
+    - repoURL: https://grafana.github.io/helm-charts
+      targetRevision: "8.8.5"
+      chart: grafana
+    - repoURL: https://github.com/mycompany/common-settings.git
+      path: configmaps-billing
+      targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
