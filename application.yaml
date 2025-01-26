@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: vault
+  namespace: argocd
 spec:
   destination:
     namespace: vault
@@ -34,6 +35,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: home-iot
+  namespace: argocd
 spec:
   destination:
     name: ""
@@ -42,17 +44,41 @@ spec:
   source:
     path: ""
     repoURL: https://dispiny.github.io/home-iot/
-    targetRevision: ""
+    targetRevision: "1.0.5"
     chart: home-iot
   sources: []
   project: default
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
     syncOptions:
-      - PruneLast=true
-      - RespectIgnoreDifferences=true
       - ServerSideApply=true
-      - ApplyOutOfSyncOnly=true
+  ignoreDifferences:
+    - kind: ConfigMap
+    - kind: Secret
+    - group: networking.k8s.io
+      kind: Ingress
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ghost
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: ghost
+    server: https://kubernetes.default.svc
+  source:
+    path: ghost/
+    repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true

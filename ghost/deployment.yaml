@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ghost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      dispiny.life/app: ghost
+  template:
+    metadata:
+      labels:
+        dispiny.life/app: ghost
+    spec:
+      containers:
+        - name: ghost
+          image: ghost:5.107.2
+          ports:
+            - containerPort: 2368
+          env:
+            - name: database__client
+              value: mysql
+            - name: database__connection__host
+              valueFrom:
+                secretKeyRef:
+                  name: ghost-db-secrets
+                  key: ghost_host
+            - name: database__connection__user
+              valueFrom:
+                secretKeyRef:
+                  name: ghost-db-secrets
+                  key: ghost_username
+            - name: database__connection__password
+              valueFrom:
+                secretKeyRef:
+                  name: ghost-db-secrets
+                  key: ghost_password
+            - name: database__connection__database
+              value: ghost
+            - name: url
+              value: https://blog.dispiny.life
+          volumeMounts:
+            - mountPath: /var/lib/ghost/content
+              name: ghost-storage
+      volumes:
+        - name: ghost-storage
+          persistentVolumeClaim:
+            claimName: ghost-pvc
