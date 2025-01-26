@@ -121,10 +121,9 @@ spec:
     - repoURL: https://grafana.github.io/helm-charts
       targetRevision: "8.8.5"
       chart: grafana
-    - repoURL: https://github.com/mycompany/common-settings.git
-      path: configmaps-billing
+    - repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
       targetRevision: HEAD
-  sources: []
+      path: grafana/
   project: default
   syncPolicy:
     automated:
@@ -132,3 +131,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+
