@@ -2,8 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ghost-ingress
-annotations:
-  nginx.ingress.kubernetes.io/proxy-body-size: 100m
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
 spec:
   ingressClassName: nginx
   rules:
