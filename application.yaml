@@ -136,7 +136,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: prometheus-node-exporter
   namespace: argocd
 spec:
   destination:
