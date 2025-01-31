@@ -46,6 +46,14 @@ data:
         K8S-Logging.Parser  On
         K8S-Logging.Exclude Off
 
+    [FILTER]
+        Name       regex
+        Match      kube.nginx.*
+        Regex      log_processed ^.*\x1b\[[0-9;]*[mG]$
+        Replace    log_processed ${log_processed}
+        Exclude    Off
+
+
   output-kafka.conf: |
     [OUTPUT]
         Name           influxdb
