@@ -45,13 +45,6 @@ data:
         Merge_Log_Key       log_processed
         K8S-Logging.Parser  On
         K8S-Logging.Exclude Off
-    
-    [FILTER]
-        Name   modify
-        Match  *
-        Remove_Key   log
-        Regex   "(?<=\x1b\[[0-9;]*m)(.*?)(?=\x1b\[39m)"
-        Replace " "
 
   output-kafka.conf: |
     [OUTPUT]
