@@ -93,11 +93,14 @@ spec:
     name: ""
     namespace: prometheus
     server: https://kubernetes.default.svc
-  source:
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      targetRevision: "27.1.0"
+      chart: prometheus
     path: ""
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: "27.1.0"
-    chart: prometheus
+    - repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
+      targetRevision: HEAD
+      path: prometheus/
   sources: []
   project: default
   syncPolicy:
@@ -107,50 +110,3 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: grafana
-  namespace: argocd
-spec:
-  destination:
-    name: ""
-    namespace: grafana
-    server: https://kubernetes.default.svc
-  sources:
-    - repoURL: https://grafana.github.io/helm-charts
-      targetRevision: "8.8.5"
-      chart: grafana
-    - repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
-      targetRevision: HEAD
-      path: grafana/
-  project: default
-  syncPolicy:
-    automated:
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
----
-
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: prometheus-node-exporter
-  namespace: argocd
-spec:
-  destination:
-    name: ""
-    namespace: prometheus
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: "4.43.1"
-    chart: prometheus-node-exporter
-  project: default
-  syncPolicy:
-    automated:
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
