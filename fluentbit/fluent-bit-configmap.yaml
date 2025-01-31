@@ -48,7 +48,7 @@ data:
     
     [FILTER]
         Name   modify
-        Match  kube.ghost.*
+        Match  *
         Remove_Key   log
         Regex   "(?<=\x1b\[[0-9;]*m)(.*?)(?=\x1b\[39m)"
         Replace " "
