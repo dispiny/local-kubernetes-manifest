@@ -108,4 +108,28 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+
 ---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluentbit
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: logging
+    server: https://kubernetes.default.svc
+  source:
+    path: fluentbit/
+    repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
