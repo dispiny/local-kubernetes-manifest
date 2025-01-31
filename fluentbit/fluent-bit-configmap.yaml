@@ -53,6 +53,12 @@ data:
         Replace    log_processed ${log_processed}
         Exclude    Off
 
+    [FILTER]
+        Name       regex
+        Match      kube.nginx.*
+        Regex      log_processed \\ 
+        Replace    log_processed ${log_processed}
+        Exclude    Off
 
   output-kafka.conf: |
     [OUTPUT]
