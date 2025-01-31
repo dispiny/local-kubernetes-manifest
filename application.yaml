@@ -97,11 +97,10 @@ spec:
     - repoURL: https://prometheus-community.github.io/helm-charts
       targetRevision: "27.1.0"
       chart: prometheus
-    path: ""
+      path: ""
     - repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
       targetRevision: HEAD
       path: prometheus/
-  sources: []
   project: default
   syncPolicy:
     automated:
