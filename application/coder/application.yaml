@@ -31,6 +31,26 @@ spec:
             service:
               type: ClusterIP
             env:
+              - name: CODER_EMAIL_SMARTHOST
+                valueFrom:
+                  secretKeyRef:
+                    name: coder-smtp
+                    key: host
+              - name: CODER_EMAIL_AUTH_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: coder-smtp
+                    key: username
+              - name: CODER_EMAIL_AUTH_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: coder-smtp
+                    key: password
+              - name: CODER_EMAIL_FROM
+                valueFrom:
+                  secretKeyRef:
+                    name: coder-smtp
+                    key: from
               - name: CODER_ACCESS_URL
                 value: "https://dev.dispiny.life"
               - name: CODER_PG_CONNECTION_URL
