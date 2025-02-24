@@ -21,6 +21,7 @@ spec:
       selfHeal: true
     syncOptions:
       - ServerSideApply=true
+      - PruneLast=true
   ignoreDifferences:
     - kind: ConfigMap
     - kind: Secret
