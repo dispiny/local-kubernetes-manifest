@@ -2,24 +2,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-application
+  name: test
   namespace: argocd
 spec:
   destination:
     name: ""
-    namespace: argocd
+    namespace: prometheus
     server: https://kubernetes.default.svc
-  source:
-    path: application/
-    repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
-    targetRevision: HEAD
-    directory:
-      recurse: true
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      targetRevision: "27.1.0"
+      chart: test
+      path: ""
   project: default
   syncPolicy:
     automated:
-      prune: false
-      selfHeal: false
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
