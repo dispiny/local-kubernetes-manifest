@@ -17,11 +17,7 @@ spec:
       prune: false # 리소스 삭제 방지
       selfHeal: true
     syncOptions:
-      - Validate=false
-      - PruneLast=true
-      - RespectIgnoreDifferences=true
       - CreateNamespace=true
-      - ApplyOutOfSyncOnly=true
       - ServerSideApply=true
   ignoreDifferences:
     - group: ""
