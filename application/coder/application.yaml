@@ -33,6 +33,8 @@ spec:
             env:
               - name: CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS
                 value: "true"
+              - name: CODER_OAUTH2_GITHUB_ALLOWED_ORGS
+                value: "dispiny"
               - name: CODER_OAUTH2_GITHUB_CLIENT_ID
                 valueFrom:
                   secretKeyRef:
@@ -44,7 +46,7 @@ spec:
                     name: coder-github-oauth
                     key: clientsecret
               - name: CODER_OAUTH2_GITHUB_ALLOW_EVERYONE
-                value: "false"
+                value: "true"
               - name: CODER_EMAIL_SMARTHOST
                 valueFrom:
                   secretKeyRef:
