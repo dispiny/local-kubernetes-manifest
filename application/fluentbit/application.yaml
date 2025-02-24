@@ -2,19 +2,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-application
+  name: fluentbit
   namespace: argocd
 spec:
   destination:
     name: ""
-    namespace: argocd
+    namespace: logging
     server: https://kubernetes.default.svc
   source:
-    path: application/
+    path: fluentbit/
     repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
     targetRevision: HEAD
-    directory:
-      recurse: true
+  sources: []
   project: default
   syncPolicy:
     automated:
@@ -23,5 +22,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
----
-

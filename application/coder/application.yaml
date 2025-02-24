@@ -1,0 +1,48 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coder
+  namespace: argocd
+spec:
+  destination:
+    name: ""
+    namespace: coder
+    server: https://kubernetes.default.svc
+  sources:
+    - path: coder/
+      repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
+      targetRevision: HEAD
+    - path: ""
+      repoURL: https://helm.coder.com/v2
+      targetRevision: 2.19.0
+      chart: coder
+      helm:
+        values: |-
+          coder:
+            volumeMounts: 
+              - name: coder-data
+                mountPath: /home/coder/.kube/config
+                subPath: config
+            volumes:
+              - name: coder-data
+                secret:
+                  secretName: coder-kube-config
+            service:
+              type: ClusterIP
+            env:
+              - name: CODER_ACCESS_URL
+                value: "https://dev.dispiny.life"
+              - name: CODER_PG_CONNECTION_URL
+                valueFrom:
+                  secretKeyRef:
+                    name: coder-db-url
+                    key: url
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
