@@ -16,6 +16,11 @@ spec:
     targetRevision: "4.5.6"
     chart: couchdb
     path: ""
+    helm:
+      values: |-
+        couchdbConfig:
+          couchdb:
+            uuid: a711e8a237904ba59ead3aec84ef5969
   project: default
   syncPolicy:
     automated:
