@@ -18,7 +18,7 @@ spec:
       path: ""
       helm:
         values: |-
-          clusterSize: 1
+          clusterSize: 3
           createAdminSecret: false
           persistentVolume:
             enabled: true
