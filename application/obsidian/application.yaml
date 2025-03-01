@@ -18,6 +18,9 @@ spec:
     path: ""
     helm:
       values: |-
+        service:
+          type: NodePort
+            externalPort: 35984
         couchdbConfig:
           couchdb:
             uuid: a711e8a237904ba59ead3aec84ef5969
