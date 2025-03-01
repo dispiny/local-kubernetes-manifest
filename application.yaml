@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: argocd-application
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=confirm
 spec:
   destination:
     name: ""
@@ -18,7 +20,7 @@ spec:
   project: default
   syncPolicy:
     automated:
-      prune: false
+      prune: true
       selfHeal: false
     syncOptions:
       - CreateNamespace=true
