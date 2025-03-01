@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: obsidian-sync-share
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=confirm
 spec:
   destination:
     name: ""
