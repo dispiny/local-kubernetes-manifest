@@ -1,0 +1,23 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: obsidian-sync-share
+  namespace: argocd
+spec:
+  destination:
+    name: ""
+    namespace: obsidian
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
+    targetRevision: HEAD
+    path: obsidian/
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - PruneLast=true
