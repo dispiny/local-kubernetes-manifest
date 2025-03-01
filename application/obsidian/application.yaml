@@ -11,19 +11,19 @@ spec:
     name: ""
     namespace: obsidian
     server: https://kubernetes.default.svc
-  source:
-    repoURL: https://apache.github.io/couchdb-helm
-    targetRevision: "4.5.6"
-    chart: couchdb
-    path: ""
-    helm:
-      values: |-
-        service:
-          type: NodePort
-          externalPort: 35984
-        couchdbConfig:
-          couchdb:
-            uuid: a711e8a237904ba59ead3aec84ef5969
+  sources:
+    - repoURL: https://apache.github.io/couchdb-helm
+      targetRevision: "4.5.6"
+      chart: couchdb
+      path: ""
+      helm:
+        values: |-
+          couchdbConfig:
+            couchdb:
+              uuid: a711e8a237904ba59ead3aec84ef5969
+    - path: obsidian/
+      repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
+      targetRevision: HEAD
   project: default
   syncPolicy:
     automated:
