@@ -19,6 +19,8 @@ spec:
       helm:
         values: |-
           clusterSize: 1
+          persistentVolume:
+            enabled: true
           couchdbConfig:
             couchdb:
               uuid: a711e8a237904ba59ead3aec84ef5969
