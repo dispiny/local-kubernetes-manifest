@@ -19,7 +19,6 @@ spec:
       helm:
         values: |-
           clusterSize: 1
-          createAdminSecret: false
           persistentVolume:
             enabled: true
           couchdbConfig:
