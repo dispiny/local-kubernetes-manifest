@@ -12,9 +12,9 @@ spec:
     namespace: ingress-nginx
     server: https://kubernetes.default.svc
   sources:
-    - repoURL: https://bitnami.com
-      targetRevision: "11.6.16"
-      chart: nginx-ingress-controller
+    - repoURL: https://kubernetes.github.io/ingress-nginx
+      targetRevision: "4.12.2"
+      chart: ingress-nginx
       path: ""
   project: default
   syncPolicy:
