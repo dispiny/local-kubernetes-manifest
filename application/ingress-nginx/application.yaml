@@ -16,6 +16,14 @@ spec:
       targetRevision: "4.12.2"
       chart: ingress-nginx
       path: ""
+      helm:
+        values: |-
+          controller:
+            service:
+              type: NodePort
+               nodePort:
+                http: 30525
+                https: 30719
   project: default
   syncPolicy:
     automated:
