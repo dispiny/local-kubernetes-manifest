@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=confirm
+spec:
+  destination:
+    name: ""
+    namespace: ingress-nginx
+    server: https://kubernetes.default.svc
+  sources:
+    - repoURL: https://kubernetes.github.io
+      targetRevision: "1.12.2"
+      chart: ingress-nginx
+      path: ""
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - PruneLast=true
