@@ -10,7 +10,7 @@ spec:
     namespace: n8n
     server: https://kubernetes.default.svc
   sources:
-    - path: n8n/
+    - path: n8n-workflow/
       repoURL: https://github.com/dispiny/local-kubernetes-manifest.git
       targetRevision: HEAD
   project: default
