@@ -8,7 +8,7 @@ metadata:
     app: n8n
     component: deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels: *labels
   template:
