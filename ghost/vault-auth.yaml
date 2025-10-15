@@ -11,7 +11,6 @@ apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultAuth
 metadata:
   name: vault-auth
-  namespace: vault
 spec:
   method: kubernetes # Authentication Methods - 쿠버네티스 인증
   mount: vso # Authentication Methods Name
