@@ -7,7 +7,5 @@ spec:
   method: kubernetes # Authentication Methods - 쿠버네티스 인증
   mount: kubernetes # Authentication Methods Name
   kubernetes:
-    role: admin # vault에서 설정한 role name
-    serviceAccount: vault # kubernetes serviceaccount name
-    audiences: # role을 생성할 때 넣었던 audience 값 입력
-      - vault
+    role: vso # vault에서 설정한 role name
+    serviceAccount: vso-sa # kubernetes serviceaccount name
