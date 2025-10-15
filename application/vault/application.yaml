@@ -7,10 +7,27 @@ spec:
   destination:
     namespace: vault
     server: https://kubernetes.default.svc
-  source:
-    path: vault/
-    repoURL: "https://github.com/dispiny/local-kubernetes-manifest.git"
-    targetRevision: HEAD
+  sources:
+    - path: vault/
+      repoURL: "https://github.com/dispiny/local-kubernetes-manifest.git"
+      targetRevision: HEAD
+    - path: ""
+      repoURL: https://helm.releases.hashicorp.com
+      targetRevision: 1.0.1
+      chart: vault-secrets-operator
+      helm:
+        values: |-
+          defaultVaultConnection:
+            enabled: true
+            address: http://vault:8200
+            skipTLSVerify: false
+            spec:
+            template:
+              spec:
+                containers:
+                - name: manager
+                  args:
+                  - "--client-cache-persistence-model=direct-encrypted"
   project: default
   syncPolicy:
     automated:
