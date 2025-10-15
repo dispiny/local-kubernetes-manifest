@@ -10,7 +10,7 @@ spec:
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultAuth
 metadata:
-  name: static-auth
+  name: vault-auth
   namespace: vault
 spec:
   method: kubernetes # Authentication Methods - 쿠버네티스 인증
